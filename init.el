@@ -32,7 +32,9 @@ values."
      org
      (shell :variables
             shell-default-height 30
-            shell-default-position 'bottom)
+            shell-default-position 'bottom
+            shell-default-shell 'eshell
+            shell-default-term-shell "/usr/local/bin/zsh")
      spell-checking
      syntax-checking
      version-control
@@ -46,13 +48,15 @@ values."
      lua
      finance
      sql
-     erc
+     ansible
+     restclient
+     ;;erc
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -237,6 +241,7 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(magit-push-arguments (quote ("--set-upstream")))
  '(sql-connection-alist
    (quote
     (("pond5-dev"
