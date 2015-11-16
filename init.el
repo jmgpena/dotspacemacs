@@ -23,7 +23,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
      git
@@ -46,7 +46,7 @@ values."
      lua
      finance
      sql
-     erc
+     ;;erc
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -101,7 +101,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Hack"
+   dotspacemacs-default-font '("DejaVu Sans Mono"
                                :size 13
                                :weight normal
                                :width normal
@@ -219,6 +219,7 @@ layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'alternate)
   (setq ispell-local-dictionary "en_US")
   ;; org local configuration
+  (setq org-ellipsis "↴")
   ;; global keys
   (evil-leader/set-key "oc" 'org-capture)
   (evil-leader/set-key "oo" 'org-cycle-agenda-files)
@@ -237,6 +238,7 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(paradox-github-token t)
  '(sql-connection-alist
    (quote
     (("pond5-dev"
