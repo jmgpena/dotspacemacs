@@ -24,7 +24,7 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (auto-completion :variables
-                      auto-completion-enable-help-tooltip f)
+                      auto-completion-enable-help-tooltip nil)
      ;; better-defaults
      emacs-lisp
      git
@@ -37,7 +37,8 @@ values."
             shell-default-shell 'eshell
             shell-default-term-shell "/usr/local/bin/zsh")
      spell-checking
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-tooltips nil)
      version-control
      colors
      (clojure :variables
@@ -51,6 +52,7 @@ values."
      sql
      ansible
      restclient
+     yaml
      ;;erc
      )
    ;; List of additional packages that will be installed without being
@@ -223,11 +225,23 @@ user code."
 layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'alternate)
   (setq ispell-local-dictionary "en_US")
+  ;; javascript
+  (setq-default js2-basic-offset 2)
+  (setq-default js-indent-level 2)
   ;; org local configuration
   (setq org-ellipsis "↴")
   ;; global keys
   (evil-leader/set-key "oc" 'org-capture)
   (evil-leader/set-key "oo" 'org-cycle-agenda-files)
+  (setq org-fontify-done-headline t)
+  (custom-set-faces
+   '(org-agenda-structure )
+   '(org-done ((t (:foreground "grey" :weight normal :strike-through t))))
+   '(org-headline-done ((((class color) (min-colors 16) (background dark)) (:foreground "grey" :strike-through t)))))
+  ;; archive tasks to date-tree file
+  (setq org-archive-save-context-info '(time file ltags itags category))
+  ;;(require 'org-datetree)
+  (setq org-archive-location "~/Dropbox/org/dailylog.org::datetree/")
   ;; agenda files
   (when (file-exists-p "~/Dropbox/org")
     (setq org-directory "~/Dropbox/org")
