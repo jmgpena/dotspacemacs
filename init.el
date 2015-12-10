@@ -223,6 +223,8 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (when (eq system-type 'windows-nt)
+    (setq magit-git-executable "c:\\msys64\\usr\\bin\\git"))
   (setq powerline-default-separator 'alternate)
   (setq ispell-local-dictionary "en_US")
   ;; javascript
