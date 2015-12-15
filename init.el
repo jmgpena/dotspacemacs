@@ -223,6 +223,9 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (editorconfig-mode 1)
+  (add-hook 'js2-mode-hook (lambda () (setq flycheck-disabled-checkers '(drupal-phpcs))))
+  ;; (setq-default flycheck-disabled-checkers '(drupal-phpcs))
   (when (eq system-type 'windows-nt)
     (setq magit-git-executable "c:\\msys64\\usr\\bin\\git"))
   (setq powerline-default-separator 'alternate)
