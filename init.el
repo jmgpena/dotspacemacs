@@ -53,6 +53,7 @@ values."
      ansible
      restclient
      yaml
+     emoji
      ;;erc
      )
    ;; List of additional packages that will be installed without being
