@@ -113,7 +113,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-dark
+   dotspacemacs-themes '(
+                         solarized-dark
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
@@ -262,7 +263,10 @@ user code here.  The exception is org related code, which should be placed in
   (set-keyboard-coding-system 'utf-8-unix)
   (set-selection-coding-system 'utf-8-unix)
   ;; set environment coding system
-  (set-language-environment 'utf-8))
+  (set-language-environment 'utf-8)
+  (setq solarized-use-variable-pitch nil
+        solarized-scale-org-headlines nil
+        solarized-distinct-fringe-background t))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -279,7 +283,8 @@ layers configuration. You are free to put any user code."
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
   ;; org local configuration
-  (setq org-ellipsis "↴")
+  (setq org-ellipsis "…")
+  (setq org-bullets-bullet-list '("*" "*" "*" "*"))
   ;; global keys
   (evil-leader/set-key "oc" 'org-capture)
   (evil-leader/set-key "oo" 'org-cycle-agenda-files)
