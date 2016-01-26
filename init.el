@@ -47,6 +47,7 @@ values."
      javascript
      html
      go
+     elixir
      lua
      finance
      sql
@@ -273,6 +274,7 @@ user code here.  The exception is org related code, which should be placed in
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (editorconfig-mode 1)
+  (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
   (add-hook 'js2-mode-hook (lambda () (setq flycheck-disabled-checkers '(drupal-phpcs))))
   ;; (setq-default flycheck-disabled-checkers '(drupal-phpcs))
   (when (eq system-type 'windows-nt)
