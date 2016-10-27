@@ -44,7 +44,8 @@ values."
      git
      github
      markdown
-     org
+     (org :variables
+          org-enable-reveal-js-support t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -310,6 +311,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq custom-file "~/.emacs-custom.el")
   (setq system-time-locale "C")
   (setq locale-coding-system 'utf-8-unix)
   (prefer-coding-system 'utf-8-unix)
@@ -339,43 +341,31 @@ you should place your code here."
   ;; javascript
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
-  ;; org local configuration
-  (setq org-ellipsis "…")
-  (setq org-bullets-bullet-list '("*" "*" "*" "*"))
   ;; global keys
   (evil-leader/set-key "oc" 'org-capture)
   (evil-leader/set-key "oo" 'org-cycle-agenda-files)
-  (setq org-fontify-done-headline t)
-  (custom-set-faces
-   '(org-agenda-structure )
-   '(org-done ((t (:foreground "grey" :weight normal :strike-through t))))
-   '(org-headline-done ((((class color) (min-colors 16) (background dark)) (:foreground "grey" :strike-through t)))))
-  ;; archive tasks to date-tree file
-  (setq org-archive-save-context-info '(time file ltags itags category))
-  ;;(require 'org-datetree)
-  (setq org-archive-location "~/Dropbox/org/dailylog.org::datetree/")
-  ;; agenda files
-  (when (file-exists-p "~/Dropbox/org")
-    (setq org-directory "~/Dropbox/org")
-    (setq org-default-notes-file (concat org-directory "/wip.org"))
-    (setq org-agenda-files '("~/Dropbox/org/wip.org"
-                             "~/Dropbox/org/ref.org"
-                             "~/Dropbox/org/dailylog.org")))
+  ;; org local configuration
+  (with-eval-after-load 'org
+    (setq org-ellipsis "…")
+    ;; (setq org-bullets-bullet-list '("*" "*" "*" "*"))
+    (setq org-startup-indented 'indent)
+    (setq org-fontify-done-headline t)
+    (custom-set-faces
+     '(org-agenda-structure )
+     '(org-done ((t (:foreground "grey" :weight normal :strike-through t))))
+     '(org-headline-done ((((class color) (min-colors 16) (background dark)) (:foreground "grey" :strike-through t)))))
+    ;; archive tasks to date-tree file
+    (setq org-archive-save-context-info '(time file ltags itags category))
+    ;;(require 'org-datetree)
+    (setq org-archive-location "~/Dropbox/org/dailylog.org::datetree/")
+    ;; agenda files
+    (when (file-exists-p "~/Dropbox/org")
+      (setq org-directory "~/Dropbox/org")
+      (setq org-default-notes-file (concat org-directory "/wip.org"))
+      (setq org-agenda-files '("~/Dropbox/org/wip.org"
+                               "~/Dropbox/org/ref.org"
+                               "~/Dropbox/org/dailylog.org"))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (mwim yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit sql-indent spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode restclient restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters quelpa popwin phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file ob-http neotree multi-term move-text mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum livid-mode linum-relative link-hint less-css-mode ledger-mode json-mode js2-refactor js-doc jinja2-mode jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md flyspell-correct-helm flycheck-pos-tip flycheck-mix flycheck-ledger flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump drupal-mode diff-hl define-word company-web company-tern company-statistics company-go column-enforce-mode color-theme-sanityinc-tomorrow color-identifiers-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile ansible-doc ansible alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
