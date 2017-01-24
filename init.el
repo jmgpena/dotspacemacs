@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     rust
+     ruby
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -71,6 +73,9 @@ values."
      yaml
      ;;emoji
      ;;erc
+     (elfeed :variables
+             rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")
+             elfeed-db-directory "~/Dropbox/org/.elfeed")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -350,6 +355,7 @@ you should place your code here."
     ;; (setq org-bullets-bullet-list '("*" "*" "*" "*"))
     (setq org-startup-indented 'indent)
     (setq org-fontify-done-headline t)
+    (setq org-catch-invisible-edits 'error)
     (custom-set-faces
      '(org-agenda-structure )
      '(org-done ((t (:foreground "grey" :weight normal :strike-through t))))
@@ -364,7 +370,11 @@ you should place your code here."
       (setq org-default-notes-file (concat org-directory "/wip.org"))
       (setq org-agenda-files '("~/Dropbox/org/wip.org"
                                "~/Dropbox/org/ref.org"
-                               "~/Dropbox/org/dailylog.org"))))
+                               "~/Dropbox/org/dailylog.org")))
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((ditaa . t)))
+    (setq org-ditaa-jar-path "~/Dropbox/config/emacs/ditaa.jar"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
