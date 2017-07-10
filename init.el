@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     themes-megapack
+     shell-scripts
      nginx
      python
      rust
@@ -78,6 +80,7 @@ values."
      (elfeed :variables
              rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")
              elfeed-db-directory "~/Dropbox/org/.elfeed")
+     pdf-tools
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -155,9 +158,12 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-tomorrow-night
+   dotspacemacs-themes '(
+                         gruvbox-dark-hard
+                         sanityinc-tomorrow-night
+                         sanityinc-solarized-dark
                          spacemacs-dark
-                         spacemacs-light)
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
