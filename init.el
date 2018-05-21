@@ -40,6 +40,7 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      themes-megapack
+     better-defaults
      shell-scripts
      nginx
      python
@@ -49,7 +50,6 @@ This function should only modify configuration layer settings."
      ;ivy
      (auto-completion :variables
                       auto-completion-enable-help-tooltip nil)
-     better-defaults
      emacs-lisp
      git
      github
@@ -61,7 +61,7 @@ This function should only modify configuration layer settings."
             shell-default-height 30
             shell-default-position 'bottom
             shell-default-shell 'eshell
-            shell-default-term-shell "/usr/local/bin/zsh")
+            shell-default-term-shell "/usr/bin/bash")
      spell-checking
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
@@ -80,8 +80,6 @@ This function should only modify configuration layer settings."
      ansible
      restclient
      yaml
-     ;;emoji
-     ;;erc
      pdf-tools
      elm
      (ranger :variables
@@ -90,6 +88,8 @@ This function should only modify configuration layer settings."
      common-lisp
      docker
      groovy
+     kotlin
+     csv
      )
 
    ;; List of additional packages that will be installed without being
@@ -203,9 +203,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(gruvbox-dark-hard
-                         spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(gruvbox-dark-hard)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -214,7 +212,7 @@ It should only modify the values of Spacemacs settings."
    ;; to create your own spaceline theme. Value can be a symbol or list with\
    ;; additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs :separator bar :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -415,6 +413,9 @@ It should only modify the values of Spacemacs settings."
    ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
 
+   ;; If non-nil, start an Emacs server if one is not already running.
+   dotspacemacs-enable-server t
+
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
@@ -470,6 +471,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq custom-file "~/.emacs-custom.el")
+  (load custom-file)
   (setq system-time-locale "C")
   (setq locale-coding-system 'utf-8-unix)
   (prefer-coding-system 'utf-8-unix)
@@ -487,12 +489,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (editorconfig-mode 1)
   (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
   (add-hook 'js2-mode-hook (lambda () (setq flycheck-disabled-checkers '(drupal-phpcs))))
   (when (eq system-type 'windows-nt)
     (setq magit-git-executable "c:\\msys64\\usr\\bin\\git"))
-  (setq powerline-default-separator 'alternate)
   (setq ispell-local-dictionary "en_US")
   ;; javascript
   (setq-default js2-basic-offset 2)
