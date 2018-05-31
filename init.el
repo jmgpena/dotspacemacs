@@ -551,7 +551,9 @@ before packages are loaded."
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((ditaa . t)))
-    (setq org-ditaa-jar-path "~/Dropbox/config/emacs/ditaa.jar"))
+    (setq org-ditaa-jar-path "~/Dropbox/config/emacs/ditaa.jar")
+    (require 'ox-beamer)
+    (setq org-export-backends '(beamer html latex md)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
