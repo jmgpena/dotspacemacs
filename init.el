@@ -520,6 +520,8 @@ before packages are loaded."
     (setq org-startup-indented 'indent)
     (setq org-fontify-done-headline t)
     (setq org-catch-invisible-edits 'error)
+    (require 'org-habit)
+    (setq org-habit-show-habits-only-for-today nil)
     (custom-set-faces
      '(org-agenda-structure )
      '(org-done ((t (:foreground "grey" :weight normal :strike-through t))))
