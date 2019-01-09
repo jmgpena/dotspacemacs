@@ -68,8 +68,8 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
      version-control
      colors
-     (clojure :variables
-              clojure-enable-fancyfy-symbols t)
+     ;; (clojure :variables
+     ;;          clojure-enable-fancyfy-symbols t)
      php
      javascript
      html
@@ -241,7 +241,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("DejaVu Sans Mono"
                                :size 13
                                :weight normal
                                :width normal)
@@ -531,10 +531,10 @@ before packages are loaded."
     ;; agenda files
     (when (file-exists-p "~/Dropbox/org")
       (setq org-directory "~/Dropbox/org")
-      (setq org-default-notes-file (concat org-directory "/wip.org"))
-      (setq org-agenda-files '("~/Dropbox/org/wip.org"
-                               "~/Dropbox/org/ref.org"
-                               "~/Dropbox/org/dailylog.org")))
+      (setq org-default-notes-file (concat org-directory "/live/wip.org"))
+      (setq org-agenda-files '("~/Dropbox/org/live/wip.org"
+                               "~/Dropbox/org/live/ref.org"
+                               "~/Dropbox/org/live/dailylog.org")))
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((ditaa . t)))
