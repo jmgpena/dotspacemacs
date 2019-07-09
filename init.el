@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -33,7 +33,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(purescript
+     haskell
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -82,7 +83,6 @@ This function should only modify configuration layer settings."
      restclient
      yaml
      pdf
-     elm
      (ranger :variables
              ranger-show-preview t
              ranger-show-literal nil)
@@ -93,6 +93,7 @@ This function should only modify configuration layer settings."
      csv
      epub
      terraform
+     ocaml
      )
 
    ;; List of additional packages that will be installed without being
@@ -102,7 +103,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(memento-mori)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -215,6 +216,11 @@ It should only modify the values of Spacemacs settings."
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
 
+   ;; Default major mode for a new empty buffer. Possible values are mode
+   ;; names such as `text-mode'; and `nil' to use Fundamental mode.
+   ;; (default `text-mode')
+   dotspacemacs-new-empty-buffer-major-mode 'text-mode
+
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
 
@@ -234,15 +240,14 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator bar :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(doom :separator bar :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
-   ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("DejaVu Sans Mono"
+   ;; Default font or prioritized list of fonts.
+   dotspacemacs-default-font '("Dejavu Sans Mono"
                                :size 13
                                :weight normal
                                :width normal)
@@ -346,6 +351,11 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil) (Emacs 24.4+ only)
    dotspacemacs-maximized-at-startup nil
 
+   ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
+   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
+   ;; borderless fullscreen. (default nil)
+   dotspacemacs-undecorated-at-startup nil
+
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -373,10 +383,14 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-smooth-scrolling t
 
    ;; Control line numbers activation.
-   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
-   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
+   ;; `prog-mode' and `text-mode' derivatives. If set to `relative', line
+   ;; numbers are relative. If set to `visual', line numbers are also relative,
+   ;; but lines are only visual lines are counted. For example, folded lines
+   ;; will not be counted and wrapped lines are counted as multiple lines.
    ;; This variable can also be set to a property list for finer control:
    ;; '(:relative nil
+   ;;   :visual nil
    ;;   :disabled-for-modes dired-mode
    ;;                       doc-view-mode
    ;;                       markdown-mode
@@ -384,6 +398,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       pdf-view-mode
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
+   ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers nil
 
@@ -504,6 +519,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq exec-path-from-shell-arguments '("-i"))
   (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
   (add-hook 'js2-mode-hook (lambda () (setq flycheck-disabled-checkers '(drupal-phpcs))))
   (when (eq system-type 'windows-nt)
@@ -514,6 +530,8 @@ before packages are loaded."
   (setq-default js-indent-level 2)
   ;; global keys
   (evil-leader/set-key "oo" 'org-cycle-agenda-files)
+  (setq memento-mori-birth-date "1973-01-15")
+  (memento-mori-mode t)
   ;; org local configuration
   (with-eval-after-load 'org
     (setq org-ellipsis "…")
