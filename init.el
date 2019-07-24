@@ -94,6 +94,8 @@ This function should only modify configuration layer settings."
      epub
      terraform
      ocaml
+     slack
+     (elfeed :variables rmh-elfeed-org-files (list "~/.org/elfeed.org"))
      )
 
    ;; List of additional packages that will be installed without being
@@ -493,6 +495,8 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (when (boundp 'w32-pipe-read-delay)
+    (setq w32-pipe-read-delay 0))
   (setq custom-file "~/.emacs-custom.el")
   (load custom-file)
   (setq system-time-locale "C")
@@ -550,12 +554,12 @@ before packages are loaded."
     ;;(require 'org-datetree)
     (setq org-archive-location "~/Dropbox/org/dailylog.org::datetree/")
     ;; agenda files
-    (when (file-exists-p "~/Dropbox/org")
-      (setq org-directory "~/Dropbox/org")
-      (setq org-default-notes-file (concat org-directory "/live/wip.org"))
-      (setq org-agenda-files '("~/Dropbox/org/live/wip.org"
-                               "~/Dropbox/org/live/ref.org"
-                               "~/Dropbox/org/live/dailylog.org")))
+    (when (file-exists-p "~/.org")
+      (setq org-directory "~/.org")
+      (setq org-default-notes-file (concat org-directory "/wip.org"))
+      (setq org-agenda-files '("~/.org/wip.org"
+                               "~/.org/ref.org"
+                               "~/.org/dailylog.org")))
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((ditaa . t)))
