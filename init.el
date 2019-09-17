@@ -74,7 +74,7 @@ This function should only modify configuration layer settings."
      colors
      ;; (clojure :variables
      ;;          clojure-enable-fancyfy-symbols t)
-     php
+     (php :packages (when (eq system-type 'windows-nt) '(not php-extras)))
      javascript
      html
      go
@@ -252,10 +252,14 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("DejavuSansMono Nerd Font"
-                               :size 13
-                               :weight normal
-                               :width normal)
+   dotspacemacs-default-font (let ((fonts '("FuraCode NF" "DejavuSansMono Nerd Font" "DejaVuSansMono NF")))
+                               (mapcar (lambda (font)
+                                         `(,font
+                                           :size 13
+                                           :weight normal
+                                           :width normal
+                                           :powerline-scale 1.5))
+                                       fonts))
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -529,9 +533,10 @@ before packages are loaded."
   (setq exec-path-from-shell-arguments '("-i"))
   (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
   (add-hook 'js2-mode-hook (lambda () (setq flycheck-disabled-checkers '(drupal-phpcs))))
-  (when (eq system-type 'windows-nt)
-    (setq magit-git-executable "c:\\msys64\\usr\\bin\\git"))
-  (setq ispell-local-dictionary "en_US")
+  (with-eval-after-load "ispell"
+    (when (eq system-type 'windows-nt)
+      (setq ispell-program-name "C:\\Users\\jorge\\scoop\\apps\\msys2\\20190524\\usr\\bin\\aspell.exe"))
+    (setq ispell-local-dictionary "en_US"))
   ;; javascript
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
