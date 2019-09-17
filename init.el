@@ -254,7 +254,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font (let ((fonts '("FuraCode NF" "DejavuSansMono Nerd Font" "DejaVuSansMono NF")))
+   dotspacemacs-default-font (let ((fonts '("SauceCodePro Nerd Font" "SauceCodePro NF" "FuraCode Nerd Font" "FuraCode NF")))
                                (mapcar (lambda (font)
                                          `(,font
                                            :size 13
