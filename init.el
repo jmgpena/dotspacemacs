@@ -46,7 +46,9 @@ This function should only modify configuration layer settings."
      lsp
      (python :variables
              python-backend 'lsp
+             python-test-runner 'pytest
              python-auto-set-local-pyenv-version 'on-visit
+             python-formatter 'black
              :packages (not pipenv))
      dap
      rust
