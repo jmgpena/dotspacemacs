@@ -562,11 +562,11 @@ before packages are loaded."
     ;; archive tasks to date-tree file
     (setq org-archive-save-context-info '(time file ltags itags category))
     ;;(require 'org-datetree)
-    (setq org-archive-location "~/Dropbox/org/dailylog.org::datetree/")
     ;; agenda files
     (when (file-exists-p "~/.org")
       (setq org-directory "~/.org")
       (setq org-default-notes-file (concat org-directory "/wip.org"))
+      (setq org-archive-location "~/.org/dailylog.org::datetree/")
       (setq org-agenda-files '("~/.org/wip.org"
                                "~/.org/ref.org"
                                "~/.org/dailylog.org")))
