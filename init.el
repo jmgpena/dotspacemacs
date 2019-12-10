@@ -32,8 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(purescript
-     haskell
+   '(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -44,15 +43,6 @@ This function should only modify configuration layer settings."
      shell-scripts
      nginx
      lsp
-     (python :variables
-             python-backend 'lsp
-             python-test-runner 'pytest
-             python-auto-set-local-pyenv-version 'on-visit
-             python-formatter 'black
-             :packages (not pipenv))
-     dap
-     rust
-     ruby
      helm
      ;ivy
      (auto-completion :variables
@@ -76,13 +66,19 @@ This function should only modify configuration layer settings."
      colors
      ;; (clojure :variables
      ;;          clojure-enable-fancyfy-symbols t)
-     (php :packages (when (eq system-type 'windows-nt) '(not php-extras)))
+     (python :variables
+             python-backend 'lsp
+             python-test-runner 'pytest
+             python-auto-set-local-pyenv-version 'on-visit
+             python-formatter 'black
+             :packages (not pipenv))
+     rust
+     ruby
+     php
      javascript
      html
      go
-     elixir
      lua
-     finance
      sql
      ansible
      restclient
@@ -99,6 +95,7 @@ This function should only modify configuration layer settings."
      epub
      terraform
      ocaml
+     haskell
      slack
      (elfeed :variables rmh-elfeed-org-files (list "~/.org/elfeed.org"))
      )
@@ -199,9 +196,6 @@ It should only modify the values of Spacemacs settings."
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
-
-   ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading nil
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
