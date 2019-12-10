@@ -248,7 +248,11 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font (let ((fonts '("SauceCodePro Nerd Font" "SauceCodePro NF" "FuraCode Nerd Font" "FuraCode NF")))
+   dotspacemacs-default-font (let ((fonts '(
+                                            "DejaVuSansMono NF"
+                                            "SauceCodePro Nerd Font" "SauceCodePro NF"
+                                            "FuraCode Nerd Font" "FuraCode NF"
+                                            )))
                                (mapcar (lambda (font)
                                          `(,font
                                            :size 13
@@ -511,6 +515,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (set-selection-coding-system 'utf-8-unix)
   ;; set environment coding system
   (set-language-environment 'utf-8)
+  (setq auto-window-vscroll nil)
   )
 
 (defun dotspacemacs/user-load ()
