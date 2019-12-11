@@ -64,8 +64,8 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
      version-control
      colors
-     ;; (clojure :variables
-     ;;          clojure-enable-fancyfy-symbols t)
+     (clojure :variables
+               clojure-enable-fancyfy-symbols t)
      (python :variables
              python-backend 'lsp
              python-test-runner 'pytest
