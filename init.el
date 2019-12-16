@@ -75,7 +75,9 @@ This function should only modify configuration layer settings."
      rust
      ruby
      php
-     javascript
+     (javascript :variables
+                 js2-basic-offset 2
+                 js-indent-level 2)
      html
      go
      lua
@@ -504,8 +506,6 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (when (boundp 'w32-pipe-read-delay)
     (setq w32-pipe-read-delay 0))
-  (setq custom-file "~/.emacs-custom.el")
-  (load custom-file)
   (setq system-time-locale "C")
   (setq locale-coding-system 'utf-8-unix)
   (prefer-coding-system 'utf-8-unix)
@@ -538,9 +538,6 @@ before packages are loaded."
     (when (eq system-type 'windows-nt)
       (setq ispell-program-name "C:\\Users\\jorge\\scoop\\apps\\msys2\\20190524\\usr\\bin\\aspell.exe"))
     (setq ispell-local-dictionary "en_US"))
-  ;; javascript
-  (setq-default js2-basic-offset 2)
-  (setq-default js-indent-level 2)
   ;; global keys
   (evil-leader/set-key "oo" 'org-cycle-agenda-files)
   (setq memento-mori-birth-date "1973-01-15")
