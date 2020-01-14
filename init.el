@@ -539,7 +539,8 @@ before packages are loaded."
       (setq ispell-program-name "C:\\Users\\jorge\\scoop\\apps\\msys2\\20190524\\usr\\bin\\aspell.exe"))
     (setq ispell-local-dictionary "en_US"))
   ;; global keys
-  (evil-leader/set-key "oo" 'org-cycle-agenda-files)
+  (spacemacs/declare-prefix "o" "own-menu")
+  (spacemacs/set-leader-keys "oo" 'org-cycle-agenda-files)
   (setq memento-mori-birth-date "1973-01-15")
   (memento-mori-mode t)
   ;; org local configuration
