@@ -67,9 +67,9 @@ This function should only modify configuration layer settings."
      (clojure :variables
                clojure-enable-fancyfy-symbols t)
      (python :variables
+             python-auto-set-local-pyenv-version 'on-visit
              python-backend 'lsp
              python-test-runner 'pytest
-             python-auto-set-local-pyenv-version 'on-visit
              python-formatter 'black
              :packages (not pipenv))
      rust
@@ -109,7 +109,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(memento-mori)
+   dotspacemacs-additional-packages '(memento-mori exec-path-from-shell)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -501,7 +501,9 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  (spacemacs/load-spacemacs-env))
+  (spacemacs/load-spacemacs-env)
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -536,7 +538,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (setq exec-path-from-shell-arguments '("-i"))
   (add-hook 'prog-mode-hook 'spacemacs/toggle-hungry-delete-on)
   (add-hook 'js2-mode-hook (lambda () (setq flycheck-disabled-checkers '(drupal-phpcs))))
   (with-eval-after-load "ispell"
